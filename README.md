@@ -1,83 +1,51 @@
-# VSCode Roku debug extension
+# VSCode extension for Roku BrightScript Debug Protocol
 
-## Table of Contents
-1. [Preconditions](#preconditions)
-2. [Description](#description)
-3. [Installation](#installation)
-4. [Features/Usage](#features/usage)
-5. [Known issues](#known-issues)
-[Launch config parameters overview](#launch-config-parameters-overview)
-
-
-## Preconditions
-Platform used for testing:
-- macOS 10.14.6
-- Windows 7
-- Python 3.6.5
-- Roku Cooper 4640X, 9.8.0b573-29
-- ~~rokudebug py tool (from p4/apps/)~~ (Embedded to extension)
-
-
-## Description
-This is a VSCode extension for debugging Roku BrightScript application using binary debug protocol.
-![general_design_diagram](docs/6_general_design.png)
+Roku provides a VSCode extension for debugging channels with the BrightScript remote network debug protocol.
+![general_design_diagram](https://image.roku.com/ZHZscHItMTc2/6-debug-vsix-general-design.png)
 
 
 ## Installation
-1. Dependencies
-    - install python 3.5+
-       - Note: There is a possibility to explicitely specify path to python executable. Use "pathToPython" field in configuration json. (for case if no possibility to install python3.5+ globally by default)
-    - For windows it should be added to global PATH variable
-    - Note: path to python3 executable may be specified by pathToPython var in run confuguration if it's not available to run globally.
+1. Install python 3.5+. 
 
-2. Open VSCode
-### To run from source:
-3. Open debug-adapter folder
-![open_extension_folder](docs/1_open_extension_folder.png)
-4. Run extension
+    - You can explicitly specify the path to the python executable. Use "pathToPython" field in the JSON configuration. This is useful if python3.5+ cannot be installed globally by default.
 
-    Debug > Start debugging F5 or
+    - The path to the python3 executable may be specified with the **pathToPython** var in run confuguration if it is not available to run globally.
+    - For Windows, add the Roku debug VSCode extension to the global PATH variable
 
-![run_extension_window](docs/2_run_extension.png)
-5. In newly opened window open Roku BS project folder
-![open_bs_project_folder](docs/3_open_project_folder.png)
+2. Download the **roku-debug-2.0.0+4.zip** file and extract it. 
 
-### To use vsix extension distribution:
-3. Download vsix archive
-4. Install extension from vsix
-![install_from_vsix](docs/7_install_from_vsix.png)
+3. Open Visual Studio Code and install the extracted **roku-debug-2.0.0+4.vsix** file.
 
-## Usage:
+    ![install_from_vsix](https://image.roku.com/ZHZscHItMTc2/7-debug-vsix-install-from-vsix.png "install_from_vsix")
 
-1. Add debug config with required data
-![open_bs_project_folder](docs/4_add_debug_config.png)
-Note: All folders should exist. Extension may not have rights to create folders.
-2. Run channel with debug
-![open_bs_project_folder](docs/5_fill_config_and_run.png)
+## Getting started
 
+To use this extension, follow these steps:
 
-## Features/Usage:
+1. Add the debug config with the required data. All folders should exist. The extension does not have rights to create folders.![open_bs_project_folder](https://image.roku.com/ZHZscHItMTc2/4-debug-vsix-add-debug-config.png "open_bs_project_folder" )
+2. Run your Roku channel with the debug protocol
+
+  ![open_bs_project_folder](https://image.roku.com/ZHZscHItMTc2/5-debug-vsix-fill-config-and-run.png "open_bs_project_folder")
+
+## Features
+
 - Pause executions (all threads)
 - Receive threads list
 - Recieve backtrace of current thread
 - Continue execution (all threads)
 - Stop execution
 
-## Known issues:
-* Sometimes Roku reboots during launch
-
 ## Launch config parameters overview
-| Parameter                      | Default                     | Description                                                        |
-|--------------------------------|-----------------------------|--------------------------------------------------------------------|
-| rokuIp                         | Prompt shown if doesn't set | IP Address of Roku device                                          |
-| *devPassword                   | ""                          | Roku dev password                                                  |
-| projectRootFolder              | ${workspaceFolder}          | Project root folder. Default is currently open folder.             |
-| outFolder                      | ${workspaceFolder}/out      | Project out folder for zip file                                    |
-| trace                          | true                        | Enable logging of the Debug Adapter Protocol.                      |
+| Parameter                      | Default                     | Description                                                  |
+| ------------------------------ | --------------------------- | ------------------------------------------------------------ |
+| rokuIp                         | Prompt shown if doesn't set | IP Address of Roku device                                    |
+| devPassword                    | ""                          | Roku developer password.<br /><br />This must be entered before debugging. |
+| projectRootFolder              | ${workspaceFolder}          | Project root folder. Default is currently open folder.       |
+| outFolder                      | ${workspaceFolder}/out      | Project out folder for zip file                              |
+| trace                          | true                        | Enables logging of the Debug Adapter Protocol.               |
 | (optional) pathToPython        | ""                          | Path to python3.5+ executable. Use if bin is not available in env. |
-| (optional) javaPath            | ""                          | Path to java executable. Use if bin is not available in env.       |
-| (dev usage only) debugToolPath | ""                          | Path to rokudebug.py tool                                          |
-\* required to fill before run
+| (optional) javaPath            | ""                          | Path to java executable. Use if bin is not available in env. |
+| (dev usage only) debugToolPath | ""                          | Path to the rokudebug.py tool                                |
+## Known issues:
 
-[&#8593; Table of content](#table-of-Contents)
-###### Copyright (c) 2019 Roku, Inc. All rights reserved.
+* Roku devices may reboot during launch
